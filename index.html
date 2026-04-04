@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catch the Blessing </title>
+  <title>Catch the Blessing — Pro Version</title>
   <style>
     * { box-sizing: border-box; }
 
@@ -113,6 +113,7 @@
       padding: 10px 8px;
       text-align: center;
       box-shadow: 0 8px 18px var(--shadow-soft);
+      min-width: 0;
     }
 
     .stat .label {
@@ -129,6 +130,11 @@
       font-size: 1.08rem;
       color: var(--title);
       font-weight: 800;
+      line-height: 1.1;
+    }
+
+    #lives {
+      white-space: nowrap;
     }
 
     .game-wrap {
@@ -481,16 +487,6 @@
         padding: 18px 16px 24px;
       }
 
-      .stats {
-        grid-template-columns: repeat(6, 1fr);
-        gap: 4px;
-      }
-
-      .game-wrap {
-        min-height: 70vh;
-        height: 74vh;
-      }
-
       .menu-grid {
         grid-template-columns: 1fr;
       }
@@ -503,50 +499,77 @@
 
     @media (max-width: 600px) {
       .shell {
-        padding: 12px 10px 18px;
+        padding: 10px 8px 16px;
       }
 
       .title {
-        font-size: 1.4rem;
-        margin-top: 6px;
+        font-size: 1.25rem;
+        margin-top: 4px;
       }
 
       .subtitle {
-        font-size: 0.9rem;
-        line-height: 1.45;
+        font-size: 0.84rem;
+        line-height: 1.35;
         max-width: 100%;
+        margin-bottom: 10px;
       }
 
       .stats {
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 4px;
+        margin-bottom: 10px;
       }
 
       .stat {
-        padding: 12px 8px;
+        padding: 7px 4px;
+        border-radius: 10px;
+      }
+
+      .stat .label {
+        font-size: 0.52rem;
+        margin-bottom: 3px;
+        letter-spacing: 0.2px;
+      }
+
+      .stat .value {
+        font-size: 0.68rem;
+        line-height: 1.1;
+      }
+
+      #lives {
+        font-size: 0.62rem;
+        letter-spacing: 0;
+        white-space: nowrap;
       }
 
       .game-wrap {
-        min-height: 78vh;
+        min-height: 76vh;
         height: auto;
-        border-radius: 22px;
+        border-radius: 18px;
+      }
+
+      .pause-btn {
+        top: 8px;
+        right: 8px;
+        padding: 8px 10px;
+        font-size: 0.78rem;
       }
 
       .overlay {
-        padding: 12px;
+        padding: 10px;
         align-items: flex-start;
       }
 
       .overlay-card {
         width: 100%;
         max-height: none;
-        padding: 16px 14px 18px;
-        margin-top: 6px;
-        border-radius: 20px;
+        padding: 14px 12px 16px;
+        margin-top: 4px;
+        border-radius: 18px;
       }
 
       .menu-block {
-        border-radius: 16px;
+        border-radius: 14px;
       }
 
       .option-row {
@@ -558,7 +581,7 @@
       .btn,
       .name-input {
         width: 100%;
-        min-height: 46px;
+        min-height: 42px;
       }
 
       .start-actions,
@@ -568,17 +591,11 @@
         position: sticky;
         bottom: 0;
         background: linear-gradient(180deg, rgba(255,244,248,0.2), rgba(255,244,248,0.98));
-        padding-top: 12px;
-      }
-
-      .pause-btn {
-        top: 10px;
-        right: 10px;
-        padding: 9px 12px;
+        padding-top: 10px;
       }
 
       .controls-note {
-        font-size: 0.84rem;
+        font-size: 0.78rem;
       }
     }
   </style>
@@ -597,7 +614,7 @@
   <div class="shell">
     <div class="title">Catch the Blessing ✨</div>
     <div class="subtitle">
-      Catch blessings, avoid gentle obstacles, survive lightning, and keep your hearts safe.
+      Pro version: smoother canvas gameplay, faster performance, combo scoring, pause support, sounds, scoreboard, and cleaner mobile play.
     </div>
 
     <div class="stats">
@@ -834,26 +851,32 @@
     const basket = {
       x: 0,
       y: 0,
-      width: 120,
-      height: 58
+      width: window.innerWidth <= 600 ? 88 : 120,
+      height: window.innerWidth <= 600 ? 42 : 58
     };
 
     function resizeCanvas() {
       const rect = gameWrap.getBoundingClientRect();
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      basket.width = window.innerWidth <= 600 ? 88 : 120;
+      basket.height = window.innerWidth <= 600 ? 42 : 58;
+
       canvas.width = Math.floor(rect.width * dpr);
       canvas.height = Math.floor(rect.height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      basket.y = rect.height - 78;
+      basket.y = rect.height - (window.innerWidth <= 600 ? 58 : 78);
       basket.x = Math.max(0, Math.min(basket.x, rect.width - basket.width));
       draw();
     }
 
     function playSound(audioEl) {
       if (!audioEl) return;
-      if (!audioEl.paused) return;
-      audioEl.currentTime = 0;
-      audioEl.play().catch(() => {});
+      try {
+        const clone = audioEl.cloneNode(true);
+        clone.volume = audioEl.volume || 1;
+        clone.play().catch(() => {});
+      } catch (e) {}
     }
 
     function clamp(v, min, max) {
@@ -948,8 +971,13 @@
       timerEl.textContent = timeLeft;
       bestEl.textContent = best;
       comboDisplay.textContent = `x${comboMultiplier}`;
+
       const remaining = Math.max(0, 5 - livesLost);
-      livesEl.textContent = "❤️".repeat(remaining) + "🩶".repeat(5 - remaining);
+      if (window.innerWidth <= 600) {
+        livesEl.textContent = `${remaining}/5 ❤️`;
+      } else {
+        livesEl.textContent = "❤️".repeat(remaining) + "🩶".repeat(5 - remaining);
+      }
     }
 
     function increaseCombo() {
@@ -1006,19 +1034,19 @@
       ctx.fillStyle = grad;
       ctx.strokeStyle = "rgba(255,255,255,0.75)";
       ctx.lineWidth = 2;
-      roundRect(ctx, x, y + 10, w, h, 18, true, true);
+      roundRect(ctx, x, y + 8, w, h, 14, true, true);
 
       ctx.beginPath();
-      ctx.lineWidth = 4;
+      ctx.lineWidth = window.innerWidth <= 600 ? 3 : 4;
       ctx.strokeStyle = "rgba(255,255,255,0.55)";
-      ctx.arc(x + w / 2, y + 8, 32, Math.PI, 2 * Math.PI);
+      ctx.arc(x + w / 2, y + 6, window.innerWidth <= 600 ? 22 : 32, Math.PI, 2 * Math.PI);
       ctx.stroke();
 
       if (theme === "bunny") {
-        ctx.font = "24px Segoe UI Emoji";
+        ctx.font = window.innerWidth <= 600 ? "18px Segoe UI Emoji" : "24px Segoe UI Emoji";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText("🐰", x + w / 2, y + h / 2 + 8);
+        ctx.fillText("🐰", x + w / 2, y + h / 2 + 6);
       }
     }
 
@@ -1110,7 +1138,7 @@
       if (items.length > 12) return;
 
       const gold = kind === "blessing" && Math.random() < (storm ? 0.18 : 0.09);
-      const size = kind === "danger" ? 42 : (gold ? 50 : 44 + Math.random() * 8);
+      const size = kind === "danger" ? (window.innerWidth <= 600 ? 34 : 42) : (gold ? (window.innerWidth <= 600 ? 40 : 50) : (window.innerWidth <= 600 ? 34 : 44) + Math.random() * 8);
       const x = size / 2 + Math.random() * (gameWidth() - size);
 
       let difficultyBoost = 0;
@@ -1330,8 +1358,10 @@
     }
 
     function startGame() {
-      gameOverSound.pause();
-      gameOverSound.currentTime = 0;
+      try {
+        gameOverSound.pause();
+        gameOverSound.currentTime = 0;
+      } catch (e) {}
 
       playerName = playerNameInput.value.trim() || "Player";
       updatePlayerStatus(`Currently playing: ${playerName}`, true);
@@ -1361,8 +1391,10 @@
     }
 
     function goToMenu() {
-      gameOverSound.pause();
-      gameOverSound.currentTime = 0;
+      try {
+        gameOverSound.pause();
+        gameOverSound.currentTime = 0;
+      } catch (e) {}
 
       gameRunning = false;
       isPaused = false;
