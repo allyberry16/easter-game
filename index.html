@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catch the Blessing — Bunny Bear Edition</title>
+  <title>Catch the Blessing </title>
   <style>
     * { box-sizing: border-box; }
 
@@ -11,9 +11,9 @@
       --bg1: #cfa3b7;
       --bg2: #b7849c;
       --bg3: #8f667e;
-      --card: rgba(255, 248, 251, 0.92);
-      --panel: rgba(255, 244, 248, 0.96);
-      --panel-2: rgba(250, 238, 229, 0.96);
+      --card: rgba(255, 248, 251, 0.94);
+      --panel: rgba(255, 244, 248, 0.97);
+      --panel-2: rgba(250, 238, 229, 0.97);
       --title: #7f1d4e;
       --text: #4e3a43;
       --muted: #755a67;
@@ -26,19 +26,19 @@
       --gold2: #d4a437;
       --basket1: #d05c92;
       --basket2: #9e2f62;
-      --shadow-strong: rgba(58, 30, 43, 0.26);
-      --shadow-soft: rgba(102, 59, 79, 0.12);
       --danger1: #7d5a6f;
       --danger2: #5f4355;
+      --shadow-strong: rgba(58, 30, 43, 0.24);
+      --shadow-soft: rgba(102, 59, 79, 0.12);
     }
 
     body.bunny-theme {
       --bg1: #b7849c;
       --bg2: #9b6a85;
       --bg3: #6f4b60;
-      --card: rgba(255, 246, 250, 0.92);
-      --panel: rgba(255, 241, 247, 0.96);
-      --panel-2: rgba(246, 232, 222, 0.96);
+      --card: rgba(255, 246, 250, 0.94);
+      --panel: rgba(255, 241, 247, 0.97);
+      --panel-2: rgba(246, 232, 222, 0.97);
       --title: #7a1848;
       --text: #493640;
       --muted: #6e5360;
@@ -49,10 +49,10 @@
       --accent2: #8f2d56;
       --basket1: #f1b84b;
       --basket2: #d78a1e;
-      --shadow-strong: rgba(48, 24, 36, 0.3);
-      --shadow-soft: rgba(95, 55, 74, 0.14);
       --danger1: #8c6f5c;
       --danger2: #6f5748;
+      --shadow-strong: rgba(48, 24, 36, 0.28);
+      --shadow-soft: rgba(95, 55, 74, 0.14);
     }
 
     body {
@@ -62,58 +62,29 @@
       display: flex;
       justify-content: center;
       align-items: stretch;
-      padding: 0;
-      overflow-x: hidden;
-      overflow-y: auto;
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.15), rgba(255,255,255,0) 28%),
+        radial-gradient(circle at top, rgba(255,255,255,0.14), rgba(255,255,255,0) 28%),
         linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 52%, var(--bg3) 100%);
-      position: relative;
-    }
-
-    .glow-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(70px);
-      opacity: 0.34;
-      pointer-events: none;
-    }
-
-    .orb1 {
-      width: 220px;
-      height: 220px;
-      background: #9e4f75;
-      top: 4%;
-      left: 4%;
-    }
-
-    .orb2 {
-      width: 240px;
-      height: 240px;
-      background: #a9753f;
-      right: 3%;
-      bottom: 3%;
+      overflow-x: hidden;
+      color: var(--text);
     }
 
     .shell {
       width: min(100vw, 1100px);
       min-height: 100vh;
       background: var(--card);
-      border: 1px solid rgba(255,255,255,0.35);
       box-shadow:
         0 24px 55px var(--shadow-strong),
         inset 0 1px 0 rgba(255,255,255,0.55);
       backdrop-filter: blur(14px);
       padding: 20px 24px 28px;
-      position: relative;
-      z-index: 2;
     }
 
     .title {
       text-align: center;
       margin: 4px 0 6px;
       color: var(--title);
-      font-size: 2.2rem;
+      font-size: 2.15rem;
       font-weight: 800;
     }
 
@@ -123,14 +94,14 @@
       color: var(--text);
       line-height: 1.55;
       font-size: 1rem;
-      max-width: 920px;
+      max-width: 900px;
       margin-left: auto;
       margin-right: auto;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      grid-template-columns: repeat(6, minmax(100px, 1fr));
       gap: 12px;
       margin-bottom: 14px;
     }
@@ -155,17 +126,12 @@
     }
 
     .stat .value {
-      font-size: 1.15rem;
+      font-size: 1.08rem;
       color: var(--title);
       font-weight: 800;
     }
 
-    .lives-value {
-      letter-spacing: 1px;
-      font-size: 1rem;
-    }
-
-    .game-area {
+    .game-wrap {
       position: relative;
       width: 100%;
       min-height: 68vh;
@@ -174,110 +140,97 @@
       overflow: hidden;
       border: 1px solid var(--soft-border);
       background:
-        radial-gradient(circle at top, rgba(255,255,255,0.32), rgba(255,255,255,0) 32%),
-        linear-gradient(180deg, #fff6fb 0%, #fff7ef 56%, #f7fff1 100%);
+        radial-gradient(circle at top, rgba(255,255,255,0.25), rgba(255,255,255,0) 30%),
+        linear-gradient(180deg, #fff6fb 0%, #fff7ef 56%, #f7fff3 100%);
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.65);
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
       touch-action: none;
     }
 
-    .item {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      user-select: none;
-      pointer-events: none;
-      border: 1px solid rgba(177, 112, 141, 0.28);
-      box-shadow: 0 8px 18px rgba(122, 52, 83, 0.12);
-      background: rgba(255,255,255,0.92);
-    }
-
-    .item.blessing.gold {
-      background: radial-gradient(circle, var(--gold1), var(--gold2));
-      border: 1px solid #b8861a;
-      box-shadow:
-        0 8px 18px rgba(168, 117, 17, 0.22),
-        0 0 18px rgba(233, 191, 65, 0.28);
-    }
-
-    .item.danger {
-      background: linear-gradient(180deg, var(--danger1), var(--danger2));
-      color: #fff7fb;
-      border: 1px solid rgba(70, 50, 60, 0.45);
-      box-shadow:
-        0 8px 18px rgba(70, 45, 55, 0.18),
-        inset 0 2px 4px rgba(255,255,255,0.08);
-    }
-
-    .item.danger::after {
-      content: "";
-      position: absolute;
-      inset: 6px;
-      border-radius: 50%;
-      border: 1px dashed rgba(255,255,255,0.18);
-    }
-
-    .item.storm {
-      box-shadow:
-        0 8px 18px rgba(133, 45, 84, 0.16),
-        0 0 18px rgba(192, 72, 128, 0.22);
-    }
-
-    .basket-wrap {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 150px;
-      height: 95px;
-      pointer-events: none;
-    }
-
-    .basket-glow {
-      position: absolute;
-      bottom: 2px;
-      left: 5px;
-      width: 140px;
-      height: 18px;
-      background: rgba(160, 58, 104, 0.24);
-      filter: blur(10px);
-      border-radius: 50%;
-    }
-
-    .basket {
-      position: absolute;
-      bottom: 0;
-      left: 15px;
-      width: 120px;
-      height: 58px;
-      background: linear-gradient(180deg, var(--basket1), var(--basket2));
-      border-radius: 10px 10px 28px 28px;
-      border: 2px solid rgba(255,255,255,0.7);
-      box-shadow:
-        0 12px 22px rgba(126, 37, 78, 0.28),
-        inset 0 6px 10px rgba(255,255,255,0.12);
-    }
-
-    .basket::before {
-      content: "";
-      position: absolute;
-      top: -22px;
-      left: 18px;
-      width: 80px;
-      height: 28px;
-      border: 4px solid rgba(255,255,255,0.5);
-      border-bottom: none;
-      border-radius: 30px 30px 0 0;
-    }
-
-    .basket.bunny-basket::after {
-      content: "🐰";
+    .pause-btn {
       position: absolute;
       top: 14px;
+      right: 14px;
+      z-index: 9;
+      border: none;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 800;
+      cursor: pointer;
+      background: rgba(255,255,255,0.9);
+      color: var(--title);
+      border: 1px solid var(--soft-border);
+      box-shadow: 0 8px 18px var(--shadow-soft);
+    }
+
+    .top-pop {
+      position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 1.3rem;
+      z-index: 8;
+      text-align: center;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .top-pop.show { opacity: 1; }
+
+    .verse-popup {
+      top: 14px;
+      width: min(88%, 420px);
+      background: rgba(255, 244, 222, 0.98);
+      border: 1px solid rgba(178, 132, 51, 0.45);
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 12px 26px rgba(125, 86, 23, 0.18);
+      color: #5e5048;
+    }
+
+    .verse-title {
+      font-weight: 800;
+      color: #8b5a12;
+      margin-bottom: 6px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .storm-banner {
+      top: 78px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #f0d48c, #c98f2f);
+      color: #553200;
+      font-weight: 800;
+      font-size: 0.92rem;
+      box-shadow: 0 12px 24px rgba(145, 97, 17, 0.22);
+    }
+
+    .lightning-flash {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,244,180,0.82), rgba(255,255,255,0));
+      opacity: 0;
+      pointer-events: none;
+      z-index: 7;
+    }
+
+    .lightning-flash.show {
+      animation: flashStrike 0.45s ease;
+    }
+
+    @keyframes flashStrike {
+      0% { opacity: 0; }
+      12% { opacity: 1; }
+      28% { opacity: 0.3; }
+      42% { opacity: 1; }
+      100% { opacity: 0; }
     }
 
     .overlay {
@@ -302,7 +255,7 @@
     }
 
     .overlay-card {
-      width: min(100%, 620px);
+      width: min(100%, 640px);
       max-height: 100%;
       overflow-y: auto;
       background: var(--panel);
@@ -337,16 +290,22 @@
       box-shadow: 0 10px 20px rgba(92, 24, 54, 0.24);
     }
 
+    .secondary-btn {
+      border: 1px solid var(--soft-border);
+      background: rgba(255,255,255,0.85);
+      color: var(--title);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
     .menu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
       margin: 16px 0 18px;
       text-align: left;
-    }
-
-    .menu-grid-advanced {
-      grid-template-columns: 1fr 1fr;
       align-items: start;
     }
 
@@ -355,6 +314,11 @@
       border: 1px solid var(--soft-border);
       border-radius: 18px;
       padding: 12px;
+    }
+
+    .score-summary-card {
+      grid-column: 2;
+      grid-row: 2;
     }
 
     .menu-label {
@@ -401,11 +365,6 @@
       outline: none;
     }
 
-    .name-input:focus {
-      border-color: var(--accent1);
-      box-shadow: 0 0 0 3px rgba(192, 72, 128, 0.12);
-    }
-
     .player-status {
       margin-top: 10px;
       padding: 10px 12px;
@@ -422,44 +381,14 @@
       font-weight: 700;
     }
 
-    .share-row,
-    .start-actions {
+    .start-actions,
+    .share-row {
       display: flex;
       justify-content: center;
       gap: 12px;
       margin-top: 12px;
       margin-bottom: 14px;
       flex-wrap: wrap;
-    }
-
-    .secondary-btn {
-      border: 1px solid var(--soft-border);
-      background: rgba(255,255,255,0.85);
-      color: var(--title);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .instructions-card {
-      max-width: 560px;
-    }
-
-    .instructions-list {
-      display: grid;
-      gap: 10px;
-      text-align: left;
-      margin-top: 14px;
-    }
-
-    .instruction-item {
-      background: linear-gradient(135deg, var(--panel), var(--panel-2));
-      border: 1px solid var(--soft-border);
-      border-radius: 14px;
-      padding: 12px 14px;
-      color: var(--text);
-      line-height: 1.5;
     }
 
     .leaderboard {
@@ -500,11 +429,6 @@
       font-weight: 800;
     }
 
-    .score-summary-card {
-      grid-column: 2;
-      grid-row: 2;
-    }
-
     .recent-scores-list {
       display: grid;
       gap: 8px;
@@ -527,79 +451,20 @@
       color: var(--title);
     }
 
-    .verse-popup {
-      position: absolute;
-      top: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(88%, 380px);
-      background: rgba(255, 244, 222, 0.98);
-      border: 1px solid rgba(178, 132, 51, 0.45);
-      border-radius: 18px;
+    .instructions-list {
+      display: grid;
+      gap: 10px;
+      text-align: left;
+      margin-top: 14px;
+    }
+
+    .instruction-item {
+      background: linear-gradient(135deg, var(--panel), var(--panel-2));
+      border: 1px solid var(--soft-border);
+      border-radius: 14px;
       padding: 12px 14px;
-      text-align: center;
-      box-shadow: 0 12px 26px rgba(125, 86, 23, 0.18);
-      z-index: 7;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s ease;
-    }
-
-    .verse-popup.show {
-      opacity: 1;
-    }
-
-    .verse-title {
-      font-weight: 800;
-      color: #8b5a12;
-      margin-bottom: 6px;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .storm-banner {
-      position: absolute;
-      top: 74px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #f0d48c, #c98f2f);
-      color: #553200;
-      font-weight: 800;
-      font-size: 0.92rem;
-      box-shadow: 0 12px 24px rgba(145, 97, 17, 0.22);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-      z-index: 7;
-    }
-
-    .storm-banner.show {
-      opacity: 1;
-    }
-
-    .lightning-flash {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0), rgba(255,244,180,0.75), rgba(255,255,255,0));
-      opacity: 0;
-      pointer-events: none;
-      z-index: 6;
-    }
-
-    .lightning-flash.show {
-      animation: flashStrike 0.55s ease;
-    }
-
-    @keyframes flashStrike {
-      0% { opacity: 0; }
-      10% { opacity: 1; }
-      25% { opacity: 0.35; }
-      40% { opacity: 1; }
-      60% { opacity: 0.2; }
-      100% { opacity: 0; }
+      color: var(--text);
+      line-height: 1.5;
     }
 
     .controls-note {
@@ -613,7 +478,6 @@
     @media (max-width: 900px) {
       .shell {
         width: 100vw;
-        min-height: 100vh;
         padding: 18px 16px 24px;
       }
 
@@ -622,13 +486,12 @@
         gap: 10px;
       }
 
-      .game-area {
+      .game-wrap {
         min-height: 70vh;
         height: 74vh;
       }
 
-      .menu-grid,
-      .menu-grid-advanced {
+      .menu-grid {
         grid-template-columns: 1fr;
       }
 
@@ -661,10 +524,9 @@
 
       .stat {
         padding: 12px 8px;
-        border-radius: 14px;
       }
 
-      .game-area {
+      .game-wrap {
         min-height: 78vh;
         height: auto;
         border-radius: 22px;
@@ -681,10 +543,6 @@
         padding: 16px 14px 18px;
         margin-top: 6px;
         border-radius: 20px;
-      }
-
-      .overlay-card h2 {
-        font-size: 1.45rem;
       }
 
       .menu-block {
@@ -713,82 +571,66 @@
         padding-top: 12px;
       }
 
-      .basket-wrap {
-        width: 126px;
-        height: 86px;
-      }
-
-      .basket {
-        width: 100px;
-        left: 13px;
+      .pause-btn {
+        top: 10px;
+        right: 10px;
+        padding: 9px 12px;
       }
 
       .controls-note {
         font-size: 0.84rem;
-        padding-bottom: 10px;
       }
     }
   </style>
 </head>
 <body class="bunny-theme">
   <audio id="goodSound" preload="auto">
-    <source src="https://github.com/allyberry16/easter-game/blob/main/bonus%20sound.mp3">
+    <source src="https://github.com/allyberry16/easter-game/blob/main/bonus%20sound.mp3" type="audio/mpeg">
   </audio>
-
   <audio id="badSound" preload="auto">
-    <source src="https://github.com/allyberry16/easter-game/blob/main/error%20sound.mp3">
+    <source src="https://github.com/allyberry16/easter-game/blob/main/error%20sound.mp3" type="audio/mpeg">
   </audio>
-
   <audio id="gameOverSound" preload="auto">
-    <source src="https://github.com/allyberry16/easter-game/blob/main/game%20over.mp3">
+    <source src="https://github.com/allyberry16/easter-game/blob/main/game%20over.mp3" type="audio/mpeg">
   </audio>
-
-  <div class="glow-orb orb1"></div>
-  <div class="glow-orb orb2"></div>
 
   <div class="shell">
     <div class="title">Catch the Blessing ✨</div>
     <div class="subtitle">
-      Catch blessings, avoid gentle obstacles, survive lightning, and keep your hearts safe.
+      Pro version: smoother canvas gameplay, faster performance, combo scoring, pause support, sounds, scoreboard, and cleaner mobile play.
     </div>
 
     <div class="stats">
       <div class="stat"><span class="label">Score</span><span class="value" id="score">0</span></div>
-      <div class="stat"><span class="label">Lives</span><span class="value lives-value" id="lives">❤️❤️❤️❤️❤️</span></div>
+      <div class="stat"><span class="label">Lives</span><span class="value" id="lives">❤️❤️❤️❤️❤️</span></div>
       <div class="stat"><span class="label">Level</span><span class="value" id="level">1</span></div>
       <div class="stat"><span class="label">Time</span><span class="value" id="timer">60</span></div>
       <div class="stat"><span class="label">Best</span><span class="value" id="best">0</span></div>
+      <div class="stat"><span class="label">Combo</span><span class="value" id="comboDisplay">x1</span></div>
     </div>
 
-    <div class="game-area" id="gameArea">
-      <div class="verse-popup" id="versePopup">
+    <div class="game-wrap" id="gameWrap">
+      <canvas id="gameCanvas"></canvas>
+
+      <button id="pauseBtn" class="pause-btn">⏸ Pause</button>
+
+      <div class="top-pop verse-popup" id="versePopup">
         <div class="verse-title">Blessing verse</div>
         <div id="verseText"></div>
       </div>
 
-      <div class="storm-banner" id="stormBanner">Blessing Storm! ✨</div>
+      <div class="top-pop storm-banner" id="stormBanner">Blessing Storm! ✨</div>
       <div class="lightning-flash" id="lightningFlash"></div>
-
-      <div class="basket-wrap" id="basketWrap">
-        <div class="basket-glow"></div>
-        <div class="basket bunny-basket" id="basket"></div>
-      </div>
 
       <div class="overlay" id="homeScreen">
         <div class="overlay-card">
           <h2>Game Menu 🐰</h2>
           <p>Choose your name, difficulty, and theme, then start playing.</p>
 
-          <div class="menu-grid menu-grid-advanced">
+          <div class="menu-grid">
             <div class="menu-block">
               <div class="menu-label">Player Name</div>
-              <input
-                type="text"
-                id="playerNameInput"
-                class="name-input"
-                placeholder="Enter your name"
-                maxlength="20"
-              />
+              <input id="playerNameInput" class="name-input" placeholder="Enter your name" maxlength="20" />
               <div id="playerStatus" class="player-status">No active player yet.</div>
             </div>
 
@@ -824,19 +666,16 @@
       </div>
 
       <div class="overlay hidden" id="instructionsOverlay">
-        <div class="overlay-card instructions-card">
+        <div class="overlay-card">
           <h2>How to Play</h2>
-          <p>Catch the falling blessings in your basket to earn points and level up.</p>
-
           <div class="instructions-list">
             <div class="instruction-item"><strong>💖 Blessings:</strong> Catch them to gain points.</div>
             <div class="instruction-item"><strong>👑 Golden blessings:</strong> Worth more points.</div>
-            <div class="instruction-item"><strong>☁️ Obstacles:</strong> If you catch one, you lose a heart.</div>
-            <div class="instruction-item"><strong>⚡ Lightning:</strong> At harder levels, lightning may strike and take a heart.</div>
-            <div class="instruction-item"><strong>❤️ Lives:</strong> Lose all hearts and the game ends.</div>
-            <div class="instruction-item"><strong>🎨 Themes:</strong> Classic and Bunny themes change the blessings and basket style.</div>
+            <div class="instruction-item"><strong>☁️ Obstacles:</strong> Catch one and you lose a heart.</div>
+            <div class="instruction-item"><strong>⚡ Lightning:</strong> On harder levels, lightning may take a heart.</div>
+            <div class="instruction-item"><strong>🔥 Combo:</strong> Catch blessings in a row to increase your multiplier.</div>
+            <div class="instruction-item"><strong>⏸ Pause:</strong> Pause anytime and continue later.</div>
           </div>
-
           <div class="share-row">
             <button class="btn" id="closeInstructionsBtn">Close</button>
           </div>
@@ -844,27 +683,31 @@
       </div>
 
       <div class="overlay hidden" id="scoresOverlay">
-        <div class="overlay-card instructions-card">
+        <div class="overlay-card">
           <h2>Top 10 Scores</h2>
-
           <div class="leaderboard">
             <div class="scoreboard-wrap">
               <table class="scoreboard-table">
                 <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Score</th>
-                    <th>Level</th>
-                  </tr>
+                  <tr><th>#</th><th>Name</th><th>Score</th><th>Level</th></tr>
                 </thead>
                 <tbody id="allScoresBody"></tbody>
               </table>
             </div>
           </div>
-
           <div class="share-row">
             <button class="btn" id="closeScoresBtn">Close</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="overlay hidden" id="pauseOverlay">
+        <div class="overlay-card">
+          <h2>Paused</h2>
+          <p>Your game is paused.</p>
+          <div class="share-row">
+            <button class="btn" id="resumeBtn">Resume</button>
+            <button class="secondary-btn" id="pauseMenuBtn">Menu</button>
           </div>
         </div>
       </div>
@@ -880,11 +723,7 @@
             <div class="scoreboard-wrap">
               <table class="scoreboard-table">
                 <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Score</th>
-                    <th>Level</th>
-                  </tr>
+                  <tr><th>Name</th><th>Score</th><th>Level</th></tr>
                 </thead>
                 <tbody id="gameOverLeaderboardBody"></tbody>
               </table>
@@ -900,46 +739,51 @@
     </div>
 
     <div class="controls-note">
-      Desktop: move your mouse left and right. Phone: drag your finger across the game area.
+      Desktop: move your mouse. Phone: drag your finger across the game area. Press Space or tap Pause to pause.
     </div>
   </div>
 
   <script>
-    const gameArea = document.getElementById("gameArea");
-    const basketWrap = document.getElementById("basketWrap");
-    const basket = document.getElementById("basket");
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    const gameWrap = document.getElementById("gameWrap");
     const homeScreen = document.getElementById("homeScreen");
-    const homeStartBtn = document.getElementById("homeStartBtn");
     const gameOverOverlay = document.getElementById("gameOverOverlay");
-    const restartBtn = document.getElementById("restartBtn");
-    const menuBtn = document.getElementById("menuBtn");
-
-    const instructionsBtn = document.getElementById("instructionsBtn");
     const instructionsOverlay = document.getElementById("instructionsOverlay");
-    const closeInstructionsBtn = document.getElementById("closeInstructionsBtn");
-
     const scoresOverlay = document.getElementById("scoresOverlay");
-    const closeScoresBtn = document.getElementById("closeScoresBtn");
-    const viewAllScoresBtn = document.getElementById("viewAllScoresBtn");
-
-    const playerNameInput = document.getElementById("playerNameInput");
-    const playerStatus = document.getElementById("playerStatus");
-    const recentScoresList = document.getElementById("recentScoresList");
-
-    const gameOverLeaderboardBody = document.getElementById("gameOverLeaderboardBody");
-    const allScoresBody = document.getElementById("allScoresBody");
+    const pauseOverlay = document.getElementById("pauseOverlay");
 
     const scoreEl = document.getElementById("score");
     const livesEl = document.getElementById("lives");
     const levelEl = document.getElementById("level");
     const timerEl = document.getElementById("timer");
     const bestEl = document.getElementById("best");
+    const comboDisplay = document.getElementById("comboDisplay");
     const finalScoreEl = document.getElementById("finalScore");
     const finalLevelEl = document.getElementById("finalLevel");
-    const stormBanner = document.getElementById("stormBanner");
+
     const versePopup = document.getElementById("versePopup");
     const verseText = document.getElementById("verseText");
+    const stormBanner = document.getElementById("stormBanner");
     const lightningFlash = document.getElementById("lightningFlash");
+
+    const playerNameInput = document.getElementById("playerNameInput");
+    const playerStatus = document.getElementById("playerStatus");
+    const recentScoresList = document.getElementById("recentScoresList");
+    const gameOverLeaderboardBody = document.getElementById("gameOverLeaderboardBody");
+    const allScoresBody = document.getElementById("allScoresBody");
+
+    const homeStartBtn = document.getElementById("homeStartBtn");
+    const instructionsBtn = document.getElementById("instructionsBtn");
+    const closeInstructionsBtn = document.getElementById("closeInstructionsBtn");
+    const viewAllScoresBtn = document.getElementById("viewAllScoresBtn");
+    const closeScoresBtn = document.getElementById("closeScoresBtn");
+    const restartBtn = document.getElementById("restartBtn");
+    const menuBtn = document.getElementById("menuBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const resumeBtn = document.getElementById("resumeBtn");
+    const pauseMenuBtn = document.getElementById("pauseMenuBtn");
 
     const goodSound = document.getElementById("goodSound");
     const badSound = document.getElementById("badSound");
@@ -966,36 +810,61 @@
     let theme = "bunny";
     let playerName = "Player";
 
-    let basketX = 0;
     let score = 0;
     let livesLost = 0;
     let level = 1;
     let timeLeft = 60;
     let best = Number(localStorage.getItem("blessingBestObstacle") || 0);
+    let combo = 0;
+    let comboMultiplier = 1;
+    let isPaused = false;
 
     let gameRunning = false;
     let items = [];
-    let spawnInterval = null;
-    let timerInterval = null;
-    let animationFrame = null;
-    let lightningInterval = null;
-    let lastTime = 0;
+    let spawnTimer = 0;
+    let timerAccumulator = 0;
+    let lightningAccumulator = 0;
+    let stormAccumulator = 0;
+    let stormActive = false;
+    let stormDrops = 0;
     let nextVerseAt = 10;
     let nextStormAt = 20;
-    let stormActive = false;
+    let lastTime = 0;
 
-    bestEl.textContent = best;
+    const basket = {
+      x: 0,
+      y: 0,
+      width: 120,
+      height: 58
+    };
+
+    function resizeCanvas() {
+      const rect = gameWrap.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(rect.width * dpr);
+      canvas.height = Math.floor(rect.height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      basket.y = rect.height - 78;
+      basket.x = Math.max(0, Math.min(basket.x, rect.width - basket.width));
+      draw();
+    }
+
+    function playSound(audioEl) {
+      if (!audioEl) return;
+      if (!audioEl.paused) return;
+      audioEl.currentTime = 0;
+      audioEl.play().catch(() => {});
+    }
 
     function clamp(v, min, max) {
       return Math.min(Math.max(v, min), max);
     }
 
-    function playSound(audioEl) {
-      if (!audioEl) return;
-      try {
-        audioEl.currentTime = 0;
-        audioEl.play();
-      } catch (error) {}
+    function gameWidth() { return gameWrap.clientWidth; }
+    function gameHeight() { return gameWrap.clientHeight; }
+
+    function centerBasket() {
+      basket.x = (gameWidth() - basket.width) / 2;
     }
 
     function getScores() {
@@ -1023,19 +892,14 @@
     function renderRecentScores() {
       const scores = getScores().slice().sort((a, b) => b.createdAt - a.createdAt).slice(0, 3);
       recentScoresList.innerHTML = "";
-
       if (!scores.length) {
         recentScoresList.innerHTML = `<div class="recent-score-item"><span>No recent scores</span></div>`;
         return;
       }
-
       scores.forEach(item => {
         const div = document.createElement("div");
         div.className = "recent-score-item";
-        div.innerHTML = `
-          <span><strong>${item.name}</strong></span>
-          <span>${item.score} pts · Lv ${item.level}</span>
-        `;
+        div.innerHTML = `<span><strong>${item.name}</strong></span><span>${item.score} pts · Lv ${item.level}</span>`;
         recentScoresList.appendChild(div);
       });
     }
@@ -1043,21 +907,13 @@
     function renderGameOverScores() {
       const scores = getScores().slice().sort((a, b) => b.score - a.score);
       gameOverLeaderboardBody.innerHTML = "";
-
       if (!scores.length) {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="3">No scores yet</td>`;
-        gameOverLeaderboardBody.appendChild(row);
+        gameOverLeaderboardBody.innerHTML = `<tr><td colspan="3">No scores yet</td></tr>`;
         return;
       }
-
       scores.forEach(item => {
         const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${item.name}</td>
-          <td>${item.score}</td>
-          <td>${item.level}</td>
-        `;
+        row.innerHTML = `<td>${item.name}</td><td>${item.score}</td><td>${item.level}</td>`;
         gameOverLeaderboardBody.appendChild(row);
       });
     }
@@ -1065,22 +921,13 @@
     function renderAllScores() {
       const scores = getScores().slice().sort((a, b) => b.score - a.score);
       allScoresBody.innerHTML = "";
-
       if (!scores.length) {
-        const row = document.createElement("tr");
-        row.innerHTML = `<td colspan="4">No scores yet</td>`;
-        allScoresBody.appendChild(row);
+        allScoresBody.innerHTML = `<tr><td colspan="4">No scores yet</td></tr>`;
         return;
       }
-
       scores.forEach((item, index) => {
         const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${index + 1}</td>
-          <td>${item.name}</td>
-          <td>${item.score}</td>
-          <td>${item.level}</td>
-        `;
+        row.innerHTML = `<td>${index + 1}</td><td>${item.name}</td><td>${item.score}</td><td>${item.level}</td>`;
         allScoresBody.appendChild(row);
       });
     }
@@ -1092,35 +939,7 @@
 
     function applyTheme() {
       document.body.classList.toggle("bunny-theme", theme === "bunny");
-      basket.classList.toggle("bunny-basket", theme === "bunny");
-    }
-
-    function getGameWidth() {
-      return gameArea.clientWidth;
-    }
-
-    function getGameHeight() {
-      return gameArea.clientHeight;
-    }
-
-    function getBasketWidth() {
-      return basketWrap.offsetWidth;
-    }
-
-    function updateBasketPosition(x) {
-      const maxX = getGameWidth() - getBasketWidth();
-      basketX = clamp(x, 0, maxX);
-      basketWrap.style.left = basketX + "px";
-      basketWrap.style.transform = "none";
-    }
-
-    function centerBasket() {
-      updateBasketPosition((getGameWidth() - getBasketWidth()) / 2);
-    }
-
-    function renderLives() {
-      const remaining = Math.max(0, 5 - livesLost);
-      livesEl.textContent = "❤️".repeat(remaining) + "🩶".repeat(5 - remaining);
+      draw();
     }
 
     function updateStats() {
@@ -1128,82 +947,190 @@
       levelEl.textContent = level;
       timerEl.textContent = timeLeft;
       bestEl.textContent = best;
-      renderLives();
+      comboDisplay.textContent = `x${comboMultiplier}`;
+      const remaining = Math.max(0, 5 - livesLost);
+      livesEl.textContent = "❤️".repeat(remaining) + "🩶".repeat(5 - remaining);
+    }
+
+    function increaseCombo() {
+      combo += 1;
+      if (combo >= 12) comboMultiplier = 4;
+      else if (combo >= 8) comboMultiplier = 3;
+      else if (combo >= 4) comboMultiplier = 2;
+      else comboMultiplier = 1;
+      updateStats();
+    }
+
+    function resetCombo() {
+      combo = 0;
+      comboMultiplier = 1;
+      updateStats();
     }
 
     function showVerse() {
       verseText.textContent = verses[Math.floor(Math.random() * verses.length)];
       versePopup.classList.add("show");
-      setTimeout(() => versePopup.classList.remove("show"), 3000);
+      setTimeout(() => versePopup.classList.remove("show"), 2600);
     }
 
     function showStormBanner() {
       stormBanner.classList.add("show");
-      setTimeout(() => stormBanner.classList.remove("show"), 1500);
+      setTimeout(() => stormBanner.classList.remove("show"), 1200);
     }
 
-    function lightningStrike() {
-      if (!gameRunning || level < 3) return;
-
+    function showLightning() {
       lightningFlash.classList.remove("show");
       void lightningFlash.offsetWidth;
       lightningFlash.classList.add("show");
+    }
 
-      livesLost += 1;
-      updateStats();
+    function basketColor() {
+      const styles = getComputedStyle(document.body);
+      return {
+        c1: styles.getPropertyValue("--basket1").trim(),
+        c2: styles.getPropertyValue("--basket2").trim()
+      };
+    }
 
-      if (livesLost >= 5) {
-        endGame();
+    function drawBasket() {
+      const { c1, c2 } = basketColor();
+      const x = basket.x;
+      const y = basket.y;
+      const w = basket.width;
+      const h = basket.height;
+
+      const grad = ctx.createLinearGradient(x, y, x, y + h);
+      grad.addColorStop(0, c1);
+      grad.addColorStop(1, c2);
+
+      ctx.fillStyle = grad;
+      ctx.strokeStyle = "rgba(255,255,255,0.75)";
+      ctx.lineWidth = 2;
+      roundRect(ctx, x, y + 10, w, h, 18, true, true);
+
+      ctx.beginPath();
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = "rgba(255,255,255,0.55)";
+      ctx.arc(x + w / 2, y + 8, 32, Math.PI, 2 * Math.PI);
+      ctx.stroke();
+
+      if (theme === "bunny") {
+        ctx.font = "24px Segoe UI Emoji";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("🐰", x + w / 2, y + h / 2 + 8);
       }
+    }
+
+    function roundRect(ctx, x, y, w, h, r, fill, stroke) {
+      if (typeof r === "number") r = { tl: r, tr: r, br: r, bl: r };
+      ctx.beginPath();
+      ctx.moveTo(x + r.tl, y);
+      ctx.lineTo(x + w - r.tr, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+      ctx.lineTo(x + w, y + h - r.br);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+      ctx.lineTo(x + r.bl, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+      ctx.lineTo(x, y + r.tl);
+      ctx.quadraticCurveTo(x, y, x + r.tl, y);
+      ctx.closePath();
+      if (fill) ctx.fill();
+      if (stroke) ctx.stroke();
+    }
+
+    function drawBackground() {
+      const w = gameWidth();
+      const h = gameHeight();
+      const sky = ctx.createLinearGradient(0, 0, 0, h);
+      sky.addColorStop(0, "#fff8fc");
+      sky.addColorStop(0.6, "#fff8ef");
+      sky.addColorStop(1, "#f7fff3");
+      ctx.fillStyle = sky;
+      ctx.fillRect(0, 0, w, h);
+    }
+
+    function drawItems() {
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      items.forEach(item => {
+        const x = item.x;
+        const y = item.y;
+        const r = item.size / 2;
+
+        if (item.kind === "danger") {
+          const styles = getComputedStyle(document.body);
+          const grad = ctx.createLinearGradient(x - r, y - r, x + r, y + r);
+          grad.addColorStop(0, styles.getPropertyValue("--danger1").trim());
+          grad.addColorStop(1, styles.getPropertyValue("--danger2").trim());
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (item.gold) {
+          const grad = ctx.createRadialGradient(x, y, 4, x, y, r);
+          grad.addColorStop(0, "#fff4b0");
+          grad.addColorStop(1, "#d4a437");
+          ctx.fillStyle = grad;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillStyle = "rgba(255,255,255,0.95)";
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        ctx.font = `${Math.floor(item.size * 0.58)}px Segoe UI Emoji`;
+        ctx.fillText(item.symbol, x, y + 1);
+      });
+    }
+
+    function drawPausedTint() {
+      if (!isPaused) return;
+      ctx.fillStyle = "rgba(255,255,255,0.08)";
+      ctx.fillRect(0, 0, gameWidth(), gameHeight());
+    }
+
+    function draw() {
+      drawBackground();
+      drawItems();
+      drawBasket();
+      drawPausedTint();
     }
 
     function updateLevel() {
       level = Math.floor(score / 10) + 1;
     }
 
-    function createItem(kind = "blessing", isStorm = false) {
+    function createItem(kind = "blessing", storm = false) {
       if (!gameRunning) return;
+      if (items.length > 12) return;
 
-      const isGolden = kind === "blessing" && Math.random() < (isStorm ? 0.2 : 0.1);
-      const size = kind === "danger" ? 48 : (isGolden ? 56 : 50 + Math.random() * 8);
-      const x = Math.random() * (getGameWidth() - size);
-
-      const el = document.createElement("div");
-      el.className = `item ${kind}${isGolden ? " gold" : ""}${isStorm ? " storm" : ""}`;
-
-      if (kind === "blessing") {
-        const symbols = blessingSets[theme];
-        el.textContent = isGolden ? "👑" : symbols[Math.floor(Math.random() * symbols.length)];
-      } else {
-        const symbols = dangerSets[theme];
-        el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-      }
-
-      el.style.width = `${size}px`;
-      el.style.height = `${size}px`;
-      el.style.fontSize = `${kind === "danger" ? 22 : 24 + Math.random() * 4}px`;
-      el.style.left = `${x}px`;
-      el.style.top = "-60px";
-      gameArea.appendChild(el);
+      const gold = kind === "blessing" && Math.random() < (storm ? 0.18 : 0.09);
+      const size = kind === "danger" ? 42 : (gold ? 50 : 44 + Math.random() * 8);
+      const x = size / 2 + Math.random() * (gameWidth() - size);
 
       let difficultyBoost = 0;
       if (difficulty === "normal") difficultyBoost = 70;
       if (difficulty === "hard") difficultyBoost = 130;
 
+      const symbolList = kind === "blessing" ? blessingSets[theme] : dangerSets[theme];
+
       items.push({
-        el,
         kind,
+        gold,
+        symbol: gold ? "👑" : symbolList[Math.floor(Math.random() * symbolList.length)],
         x,
-        y: -60,
+        y: -40,
         size,
-        speed: (140 + Math.random() * 90) + (level - 1) * 34 + difficultyBoost + (isStorm ? 55 : 0),
-        points: isGolden ? 5 : 1
+        speed: (110 + Math.random() * 60) + (level - 1) * 22 + difficultyBoost + (storm ? 35 : 0)
       });
     }
 
-    function scheduleSpawning() {
-      if (spawnInterval) clearInterval(spawnInterval);
-
+    function spawnBatch() {
       let baseRate = 720;
       let extraDangerBase = 0.18;
       let extraDangerGrowth = 0.06;
@@ -1220,78 +1147,144 @@
         extraDangerGrowth = 0.10;
       }
 
-      const spawnRate = Math.max(140, baseRate - (level - 1) * 28);
+      const spawnRate = Math.max(260, baseRate - (level - 1) * 20);
+      if (spawnTimer < spawnRate) return;
+      spawnTimer = 0;
 
-      spawnInterval = setInterval(() => {
-        createItem("blessing", false);
+      createItem("blessing", false);
 
-        const dangerChance = Math.min(extraDangerBase + (level - 1) * extraDangerGrowth, 0.82);
+      const dangerChance = Math.min(extraDangerBase + (level - 1) * extraDangerGrowth, 0.82);
+      if (Math.random() < dangerChance) createItem("danger", false);
+      if (difficulty !== "easy" && Math.random() < dangerChance * 0.45) createItem("danger", false);
+      if (difficulty === "hard" && Math.random() < 0.18 + (level * 0.018)) createItem("danger", false);
+    }
 
-        if (Math.random() < dangerChance) createItem("danger", false);
-        if (difficulty !== "easy" && Math.random() < dangerChance * 0.45) createItem("danger", false);
-        if (difficulty === "hard" && Math.random() < 0.22 + (level * 0.02)) createItem("danger", false);
-      }, spawnRate);
+    function updateStorm(deltaMs) {
+      if (!stormActive || !gameRunning) return;
+      stormAccumulator += deltaMs;
+
+      if (stormAccumulator >= 260) {
+        stormAccumulator = 0;
+        createItem("blessing", true);
+        if (Math.random() < 0.35) createItem("danger", true);
+        stormDrops++;
+        if (stormDrops >= 6) {
+          stormActive = false;
+          stormDrops = 0;
+        }
+      }
     }
 
     function activateStorm() {
       if (stormActive || !gameRunning) return;
       stormActive = true;
+      stormDrops = 0;
+      stormAccumulator = 0;
       showStormBanner();
+    }
 
-      let drops = 0;
-      const stormInterval = setInterval(() => {
-        if (!gameRunning) {
-          clearInterval(stormInterval);
+    function basketHit(item) {
+      const basketLeft = basket.x;
+      const basketRight = basket.x + basket.width;
+      const basketTop = basket.y;
+      const basketBottom = basket.y + basket.height;
+      const itemLeft = item.x - item.size / 2;
+      const itemRight = item.x + item.size / 2;
+      const itemBottom = item.y + item.size / 2;
+
+      return itemRight > basketLeft &&
+             itemLeft < basketRight &&
+             itemBottom >= basketTop &&
+             itemBottom <= basketBottom + 18;
+    }
+
+    function updateItems(deltaSec) {
+      items = items.filter(item => {
+        item.y += item.speed * deltaSec;
+
+        if (basketHit(item)) {
+          if (item.kind === "blessing") {
+            playSound(goodSound);
+            increaseCombo();
+            score += (item.gold ? 5 : 1) * comboMultiplier;
+            updateLevel();
+
+            if (score >= nextVerseAt) {
+              showVerse();
+              nextVerseAt += 10;
+            }
+
+            if (score >= nextStormAt) {
+              activateStorm();
+              nextStormAt += 20;
+            }
+          } else {
+            playSound(badSound);
+            resetCombo();
+            livesLost += 1;
+            updateStats();
+
+            if (livesLost >= 5) {
+              endGame();
+              return false;
+            }
+          }
+
+          updateStats();
+          return false;
+        }
+
+        return item.y - item.size / 2 <= gameHeight() + 20;
+      });
+    }
+
+    function lightningUpdate(deltaMs) {
+      if (!gameRunning) return;
+      lightningAccumulator += deltaMs;
+
+      let lightningGap = 6000;
+      if (difficulty === "normal") lightningGap = 5000;
+      if (difficulty === "hard") lightningGap = 3800;
+
+      if (lightningAccumulator < lightningGap) return;
+      lightningAccumulator = 0;
+
+      let chance = 0;
+      if (level >= 3) chance = 0.15;
+      if (level >= 4) chance = 0.28;
+      if (level >= 5) chance = 0.42;
+      if (difficulty === "normal") chance += 0.08;
+      if (difficulty === "hard") chance += 0.16;
+
+      if (Math.random() < Math.min(chance, 0.7)) {
+        showLightning();
+        resetCombo();
+        livesLost += 1;
+        updateStats();
+        if (livesLost >= 5) endGame();
+      }
+    }
+
+    function timerUpdate(deltaMs) {
+      if (!gameRunning) return;
+      timerAccumulator += deltaMs;
+      while (timerAccumulator >= 1000) {
+        timerAccumulator -= 1000;
+        timeLeft -= 1;
+        updateStats();
+        if (timeLeft <= 0) {
+          endGame();
           return;
         }
-        createItem("blessing", true);
-        if (Math.random() < 0.35) createItem("danger", true);
-        drops++;
-        if (drops >= 12) {
-          clearInterval(stormInterval);
-          stormActive = false;
-        }
-      }, 160);
-    }
-
-    function basketCatch(item) {
-      const basketTop = getGameHeight() - basketWrap.offsetHeight - 10;
-      const basketBottom = basketTop + basketWrap.offsetHeight;
-      const basketLeft = basketX;
-      const basketRight = basketX + basketWrap.offsetWidth;
-
-      const itemLeft = item.x;
-      const itemRight = item.x + item.size;
-      const itemBottom = item.y + item.size;
-
-      const horizontalHit = itemRight > basketLeft && itemLeft < basketRight;
-      const verticalHit = itemBottom >= basketTop && itemBottom <= basketBottom + 16;
-
-      return horizontalHit && verticalHit;
-    }
-
-    function clearGameArtifacts() {
-      items.forEach(i => i.el.remove());
-      items = [];
-      versePopup.classList.remove("show");
-      stormBanner.classList.remove("show");
-    }
-
-    function stopLoops() {
-      clearInterval(spawnInterval);
-      clearInterval(timerInterval);
-      clearInterval(lightningInterval);
-      cancelAnimationFrame(animationFrame);
-      spawnInterval = null;
-      timerInterval = null;
-      lightningInterval = null;
-      animationFrame = null;
+      }
     }
 
     function endGame() {
+      if (!gameRunning) return;
       gameRunning = false;
-      stopLoops();
-      clearGameArtifacts();
+      isPaused = false;
+      pauseOverlay.classList.add("hidden");
+      pauseBtn.textContent = "⏸ Pause";
 
       if (score > best) {
         best = score;
@@ -1315,119 +1308,42 @@
 
       gameOverOverlay.classList.remove("hidden");
       gameOverOverlay.style.display = "flex";
+      draw();
     }
 
-    function gameLoop(timestamp) {
-      if (!gameRunning) return;
-
-      if (!lastTime) lastTime = timestamp;
-      const delta = (timestamp - lastTime) / 1000;
-      lastTime = timestamp;
-
-      items = items.filter(item => {
-        item.y += item.speed * delta;
-        item.el.style.top = `${item.y}px`;
-
-        if (basketCatch(item)) {
-          if (item.kind === "blessing") {
-            playSound(goodSound);
-            score += item.points;
-            updateLevel();
-
-            if (score >= nextVerseAt) {
-              showVerse();
-              nextVerseAt += 10;
-            }
-
-            if (score >= nextStormAt) {
-              activateStorm();
-              nextStormAt += 20;
-            }
-
-            item.el.remove();
-            updateStats();
-            scheduleSpawning();
-            return false;
-          } else {
-            playSound(badSound);
-            livesLost += 1;
-            updateStats();
-            item.el.remove();
-
-            if (livesLost >= 5) {
-              endGame();
-              return false;
-            }
-
-            return false;
-          }
-        }
-
-        if (item.y > getGameHeight()) {
-          item.el.remove();
-          return false;
-        }
-
-        return true;
-      });
-
-      animationFrame = requestAnimationFrame(gameLoop);
-    }
-
-    function startTimer() {
-      timerInterval = setInterval(() => {
-        if (!gameRunning) return;
-        timeLeft -= 1;
-        updateStats();
-        if (timeLeft <= 0) endGame();
-      }, 1000);
-    }
-
-    function startLightning() {
-      if (lightningInterval) clearInterval(lightningInterval);
-
-      let lightningGap = 6000;
-      if (difficulty === "normal") lightningGap = 5000;
-      if (difficulty === "hard") lightningGap = 3800;
-
-      lightningInterval = setInterval(() => {
-        let chance = 0;
-        if (level >= 3) chance = 0.15;
-        if (level >= 4) chance = 0.28;
-        if (level >= 5) chance = 0.42;
-        if (difficulty === "normal") chance += 0.08;
-        if (difficulty === "hard") chance += 0.16;
-
-        if (Math.random() < Math.min(chance, 0.7)) {
-          lightningStrike();
-        }
-      }, lightningGap);
+    function clearRoundState() {
+      items = [];
+      spawnTimer = 0;
+      timerAccumulator = 0;
+      lightningAccumulator = 0;
+      stormAccumulator = 0;
+      stormActive = false;
+      stormDrops = 0;
+      nextVerseAt = 10;
+      nextStormAt = 20;
+      combo = 0;
+      comboMultiplier = 1;
+      isPaused = false;
+      versePopup.classList.remove("show");
+      stormBanner.classList.remove("show");
+      pauseOverlay.classList.add("hidden");
     }
 
     function startGame() {
-      if (gameOverSound) {
-        gameOverSound.pause();
-        gameOverSound.currentTime = 0;
-      }
+      gameOverSound.pause();
+      gameOverSound.currentTime = 0;
 
       playerName = playerNameInput.value.trim() || "Player";
       updatePlayerStatus(`Currently playing: ${playerName}`, true);
 
-      stopLoops();
-      clearGameArtifacts();
+      clearRoundState();
 
       score = 0;
       livesLost = 0;
       level = 1;
-      nextVerseAt = 10;
-      nextStormAt = 20;
-      stormActive = false;
+      timeLeft = difficulty === "easy" ? 70 : difficulty === "normal" ? 60 : 45;
       lastTime = 0;
       gameRunning = true;
-
-      if (difficulty === "easy") timeLeft = 70;
-      if (difficulty === "normal") timeLeft = 60;
-      if (difficulty === "hard") timeLeft = 45;
 
       applyTheme();
       updateStats();
@@ -1437,36 +1353,82 @@
       instructionsOverlay.classList.add("hidden");
       scoresOverlay.classList.add("hidden");
       gameOverOverlay.classList.add("hidden");
+      pauseOverlay.classList.add("hidden");
+      pauseBtn.textContent = "⏸ Pause";
 
-      scheduleSpawning();
-      startTimer();
-      startLightning();
-      animationFrame = requestAnimationFrame(gameLoop);
+      draw();
+      requestAnimationFrame(loop);
     }
 
     function goToMenu() {
-      if (gameOverSound) {
-        gameOverSound.pause();
-        gameOverSound.currentTime = 0;
-      }
+      gameOverSound.pause();
+      gameOverSound.currentTime = 0;
 
       gameRunning = false;
-      stopLoops();
-      clearGameArtifacts();
+      isPaused = false;
+      clearRoundState();
 
       homeScreen.classList.remove("hidden");
       instructionsOverlay.classList.add("hidden");
       scoresOverlay.classList.add("hidden");
       gameOverOverlay.classList.add("hidden");
+      pauseOverlay.classList.add("hidden");
+      pauseBtn.textContent = "⏸ Pause";
 
       const current = playerNameInput.value.trim();
       updatePlayerStatus(current ? `Name saved: ${current}` : "No active player yet.", !!current);
+      draw();
     }
 
-    function moveBasket(clientX) {
-      const rect = gameArea.getBoundingClientRect();
-      const insideX = clientX - rect.left;
-      updateBasketPosition(insideX - getBasketWidth() / 2);
+    function pauseGame() {
+      if (!gameRunning) return;
+      isPaused = true;
+      pauseOverlay.classList.remove("hidden");
+      pauseBtn.textContent = "▶ Resume";
+      draw();
+    }
+
+    function resumeGame() {
+      if (!gameRunning) return;
+      isPaused = false;
+      pauseOverlay.classList.add("hidden");
+      pauseBtn.textContent = "⏸ Pause";
+      lastTime = 0;
+      requestAnimationFrame(loop);
+    }
+
+    function togglePause() {
+      if (!gameRunning) return;
+      if (isPaused) resumeGame();
+      else pauseGame();
+    }
+
+    function loop(timestamp) {
+      if (!gameRunning || isPaused) return;
+
+      if (!lastTime) lastTime = timestamp;
+      let deltaMs = timestamp - lastTime;
+      lastTime = timestamp;
+      deltaMs = Math.min(deltaMs, 30);
+      let deltaSec = deltaMs / 1000;
+      deltaSec = Math.min(deltaSec, 0.03);
+
+      spawnTimer += deltaMs;
+
+      spawnBatch();
+      updateStorm(deltaMs);
+      updateItems(deltaSec);
+      timerUpdate(deltaMs);
+      lightningUpdate(deltaMs);
+      draw();
+
+      if (gameRunning && !isPaused) requestAnimationFrame(loop);
+    }
+
+    function setBasketByClientX(clientX) {
+      const rect = gameWrap.getBoundingClientRect();
+      const x = clientX - rect.left - basket.width / 2;
+      basket.x = clamp(x, 0, rect.width - basket.width);
     }
 
     document.querySelectorAll("[data-difficulty]").forEach(btn => {
@@ -1488,12 +1450,12 @@
 
     playerNameInput.addEventListener("input", () => {
       const current = playerNameInput.value.trim();
-      if (current) {
-        updatePlayerStatus(`Name saved: ${current}`, true);
-      } else {
-        updatePlayerStatus("No active player yet.", false);
-      }
+      updatePlayerStatus(current ? `Name saved: ${current}` : "No active player yet.", !!current);
     });
+
+    homeStartBtn.addEventListener("click", startGame);
+    restartBtn.addEventListener("click", startGame);
+    menuBtn.addEventListener("click", goToMenu);
 
     instructionsBtn.addEventListener("click", () => {
       instructionsOverlay.classList.remove("hidden");
@@ -1503,10 +1465,8 @@
       instructionsOverlay.classList.add("hidden");
     });
 
-    instructionsOverlay.addEventListener("click", (e) => {
-      if (e.target === instructionsOverlay) {
-        instructionsOverlay.classList.add("hidden");
-      }
+    instructionsOverlay.addEventListener("click", e => {
+      if (e.target === instructionsOverlay) instructionsOverlay.classList.add("hidden");
     });
 
     viewAllScoresBtn.addEventListener("click", () => {
@@ -1518,36 +1478,48 @@
       scoresOverlay.classList.add("hidden");
     });
 
-    scoresOverlay.addEventListener("click", (e) => {
-      if (e.target === scoresOverlay) {
-        scoresOverlay.classList.add("hidden");
+    scoresOverlay.addEventListener("click", e => {
+      if (e.target === scoresOverlay) scoresOverlay.classList.add("hidden");
+    });
+
+    pauseBtn.addEventListener("click", togglePause);
+    resumeBtn.addEventListener("click", resumeGame);
+    pauseMenuBtn.addEventListener("click", () => {
+      isPaused = false;
+      pauseOverlay.classList.add("hidden");
+      goToMenu();
+    });
+
+    window.addEventListener("keydown", e => {
+      if (e.code === "Space") {
+        e.preventDefault();
+        togglePause();
       }
     });
 
-    homeStartBtn.addEventListener("click", startGame);
-    restartBtn.addEventListener("click", startGame);
-    menuBtn.addEventListener("click", goToMenu);
-
-    gameArea.addEventListener("mousemove", (e) => {
-      if (!gameRunning) return;
-      moveBasket(e.clientX);
+    gameWrap.addEventListener("mousemove", e => {
+      if (!gameRunning || isPaused) return;
+      setBasketByClientX(e.clientX);
     });
 
-    gameArea.addEventListener("touchmove", (e) => {
-      if (!gameRunning || !e.touches.length) return;
+    gameWrap.addEventListener("touchmove", e => {
+      if (!gameRunning || isPaused || !e.touches.length) return;
       e.preventDefault();
-      moveBasket(e.touches[0].clientX);
+      setBasketByClientX(e.touches[0].clientX);
     }, { passive: false });
 
-    window.addEventListener("resize", centerBasket);
+    window.addEventListener("resize", resizeCanvas);
 
     applyTheme();
-    centerBasket();
-    updateStats();
+    bestEl.textContent = best;
     renderRecentScores();
     renderGameOverScores();
     renderAllScores();
     updatePlayerStatus("No active player yet.", false);
+    resizeCanvas();
+    centerBasket();
+    updateStats();
+    draw();
   </script>
 </body>
 </html>
